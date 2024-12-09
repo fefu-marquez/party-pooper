@@ -1,0 +1,145 @@
+[gd_scene load_steps=10 format=3 uid="uid://c544h5vjtxusr"]
+
+[ext_resource type="FontFile" uid="uid://444mq4lnm3v1" path="res://assets/fonts/PixelatedEleganceRegular-ovyAA.ttf" id="1_f0k4t"]
+[ext_resource type="Script" path="res://scripts/controllers/game_controller.gd" id="1_vt5ry"]
+[ext_resource type="Script" path="res://scripts/score.gd" id="2_hxfgh"]
+[ext_resource type="Script" path="res://scripts/controllers/clouds_controller.gd" id="2_j23gi"]
+[ext_resource type="Script" path="res://scripts/lives.gd" id="3_2wp4d"]
+[ext_resource type="Script" path="res://scripts/controllers/stars_controller.gd" id="3_dijox"]
+[ext_resource type="Script" path="res://scripts/restart_game.gd" id="4_etq0r"]
+[ext_resource type="Texture2D" uid="uid://b0726ens1tckc" path="res://assets/sprites/background.png" id="4_poyns"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nua3k"]
+size = Vector2(300, 300)
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_vt5ry")
+
+[node name="CloudsController" type="Node2D" parent="."]
+script = ExtResource("2_j23gi")
+
+[node name="StarsController" type="Node2D" parent="."]
+script = ExtResource("3_dijox")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(3, 3)
+
+[node name="ScoreBar" type="CanvasGroup" parent="."]
+top_level = true
+
+[node name="Score" type="RichTextLabel" parent="ScoreBar"]
+offset_left = -58.0
+offset_top = -132.0
+offset_right = -31.0
+offset_bottom = -121.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_fonts/normal_font = ExtResource("1_f0k4t")
+theme_override_font_sizes/normal_font_size = 8
+text = "Score:"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+shortcut_keys_enabled = false
+drag_and_drop_selection_enabled = false
+script = ExtResource("2_hxfgh")
+metadata/_edit_use_anchors_ = true
+
+[node name="Lives" type="RichTextLabel" parent="ScoreBar"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 16.0
+offset_top = -132.0
+offset_right = 57.0
+offset_bottom = -121.0
+grow_horizontal = 0
+pivot_offset = Vector2(41, 0)
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_fonts/normal_font = ExtResource("1_f0k4t")
+theme_override_font_sizes/normal_font_size = 8
+text = "Lives: 2"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+shortcut_keys_enabled = false
+drag_and_drop_selection_enabled = false
+script = ExtResource("3_2wp4d")
+metadata/_edit_use_anchors_ = true
+
+[node name="GameOverScreen" type="CanvasGroup" parent="."]
+visible = false
+top_level = true
+
+[node name="Score" type="RichTextLabel" parent="GameOverScreen"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -54.5
+offset_top = -29.89
+offset_right = 54.5
+offset_bottom = -18.89
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_fonts/normal_font = ExtResource("1_f0k4t")
+theme_override_font_sizes/normal_font_size = 8
+text = "Final score: 20000000"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+shortcut_keys_enabled = false
+drag_and_drop_selection_enabled = false
+script = ExtResource("2_hxfgh")
+
+[node name="GameOver" type="RichTextLabel" parent="GameOverScreen"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -60.0
+offset_top = -62.215
+offset_right = 60.0
+offset_bottom = -46.215
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_fonts/normal_font = ExtResource("1_f0k4t")
+text = "Game Over"
+fit_content = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="GameOverScreen"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -8.0
+offset_right = 64.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+theme_override_fonts/normal_font = ExtResource("1_f0k4t")
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+text = "[center]Tap/Click anywhere to start a new game [/center]"
+
+[node name="RestartGameButton" type="TouchScreenButton" parent="GameOverScreen"]
+shape = SubResource("RectangleShape2D_nua3k")
+script = ExtResource("4_etq0r")
+
+[node name="Background" type="Sprite2D" parent="."]
+z_index = -100
+position = Vector2(0, 128)
+scale = Vector2(0.340625, 0.322657)
+texture = ExtResource("4_poyns")
+
+[connection signal="pressed" from="GameOverScreen/RestartGameButton" to="GameOverScreen/RestartGameButton" method="on_pressed"]

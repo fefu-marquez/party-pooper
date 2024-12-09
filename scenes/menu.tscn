@@ -1,0 +1,56 @@
+[gd_scene load_steps=3 format=3 uid="uid://d4f5r22wvj3ey"]
+
+[ext_resource type="PackedScene" uid="uid://cqu1m4bevqdcs" path="res://scenes/game_objects/inanimated_balloon.tscn" id="1_6fhi1"]
+[ext_resource type="FontFile" uid="uid://444mq4lnm3v1" path="res://assets/fonts/PixelatedEleganceRegular-ovyAA.ttf" id="2_fpki8"]
+
+[node name="Menu" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(3, 3)
+
+[node name="InanimatedBalloon" parent="." instance=ExtResource("1_6fhi1")]
+position = Vector2(0, -48)
+scale = Vector2(3, 3)
+
+[node name="ReferenceRect" type="ReferenceRect" parent="."]
+offset_left = -64.0
+offset_top = -136.0
+offset_right = 64.0
+offset_bottom = 136.0
+
+[node name="Title" type="RichTextLabel" parent="ReferenceRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -56.0
+offset_top = 24.0
+offset_right = 56.0
+offset_bottom = 54.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+theme_override_fonts/normal_font = ExtResource("2_fpki8")
+bbcode_enabled = true
+text = "[center][color=orange_red]P[/color][color=yellow]a[/color][color=green]r[/color][color=dark_turquoise]t[/color][color=medium_blue]y[/color] [color=purple]P[/color][color=orange_red]o[/color][color=green]o[/color][color=yellow]p[/color][color=dark_turquoise]e[/color][color=medium_blue]r[/color][/center]"
+fit_content = true
+
+[node name="Start help" type="RichTextLabel" parent="ReferenceRect"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = 72.0
+offset_right = 1.0
+offset_bottom = 88.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("2_fpki8")
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+text = "[center]Tap the ballooon to start[/center]"
+fit_content = true

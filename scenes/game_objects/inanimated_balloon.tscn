@@ -1,0 +1,95 @@
+[gd_scene load_steps=15 format=3 uid="uid://cqu1m4bevqdcs"]
+
+[ext_resource type="Script" path="res://scripts/balloons/inanimated_balloon.gd" id="1_25bd3"]
+[ext_resource type="Texture2D" uid="uid://dnp1y8hynoho2" path="res://assets/sprites/red_baloon_idle.png" id="2_8qy8s"]
+[ext_resource type="Texture2D" uid="uid://b65gufe3vfsqa" path="res://assets/sprites/red_balloon_pop.png" id="3_wai60"]
+[ext_resource type="AudioStream" uid="uid://c4h5p1104k0f3" path="res://assets/sfx/explosion-high.wav" id="4_dgvqt"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eq0g1"]
+atlas = ExtResource("2_8qy8s")
+region = Rect2(0, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hddvf"]
+atlas = ExtResource("2_8qy8s")
+region = Rect2(16, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_viytv"]
+atlas = ExtResource("2_8qy8s")
+region = Rect2(32, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e8fvd"]
+atlas = ExtResource("2_8qy8s")
+region = Rect2(48, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_75bs8"]
+atlas = ExtResource("3_wai60")
+region = Rect2(0, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ly78a"]
+atlas = ExtResource("3_wai60")
+region = Rect2(16, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4ipmr"]
+atlas = ExtResource("3_wai60")
+region = Rect2(32, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_un6j0"]
+atlas = ExtResource("3_wai60")
+region = Rect2(48, 0, 16, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bc1bg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eq0g1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hddvf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_viytv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e8fvd")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 7.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_75bs8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ly78a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4ipmr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_un6j0")
+}],
+"loop": false,
+"name": &"pop",
+"speed": 12.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_t36ml"]
+radius = 7.0
+
+[node name="InanimatedBalloon" type="Node2D"]
+script = ExtResource("1_25bd3")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, 6)
+sprite_frames = SubResource("SpriteFrames_bc1bg")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="."]
+shape = SubResource("CircleShape2D_t36ml")
+
+[node name="ExplodeStreamAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_dgvqt")
+
+[connection signal="pressed" from="TouchScreenButton" to="." method="_on_pop"]
